@@ -7,10 +7,14 @@
     <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <link href="offcanvas.css" rel="stylesheet">
     <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
   </head>
-
+  
+  <%=render "layouts/navbar"%>
   <body>
+    <main class="container">
     <%= yield %>
+    </main>
   </body>
 </html>
