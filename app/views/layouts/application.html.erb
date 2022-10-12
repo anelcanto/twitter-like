@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Fbauth</title>
+    <title>Fbauth <%= " | "+ yield(:title) unless yield(:title).blank? %></title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -14,6 +14,13 @@
   <%=render "layouts/navbar"%>
   <body>
     <main class="container">
+      <% if @show_title %>
+      <div id="title" class="row">
+        <div class="col">
+          <h1><%= yield(:title) %></h1>
+        </div>
+      </div>
+      <% end %>
     <%= yield %>
     </main>
   </body>
