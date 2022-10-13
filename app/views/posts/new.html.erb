@@ -1,7 +1,5 @@
-
 <% title "New Tweet" %>
 <%= bootstrap_form_with(model: @post, local: true) do |f| %>
     <%= f.text_area :content, hide_label: true, placeholder: "Type your tweet." %>
-    <%= f.submit "Submit" %>
+    <%= f.submit "Submit", class: "btn btn-primary btn-lg" %>
 <% end %>
-
