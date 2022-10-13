@@ -1,4 +1,5 @@
 class PostsController < ApplicationController
+
     def index
         @posts = Post.all
     end
@@ -8,7 +9,7 @@ class PostsController < ApplicationController
     end
     
     def create
-        @post = Post.new task_params
+        @post = Post.new post_params
         if @post.save
             redirect_to posts_path, notice: "Task created."
         else
@@ -20,7 +21,26 @@ class PostsController < ApplicationController
         @post = Post.find params[:id]
     end
     
-    def task_params
+    def edit
+        @post = Post.find params[:id]
+    end
+    
+    def update
+        @post = Post.find params[:id]
+        if @post.update post_params
+            redirect_to @post, notice: "Post was updated."
+        else
+            render :edit, status: :unprocessable_entity
+        end
+    end
+    
+    def destroy
+        @post = Post.find params[:id]
+        @post.destroy
+        redirect_to posts_path, alert: "Post was deleted"
+    end
+    
+    def post_params
         params.require(:post).permit(:content, :parent_id, :mood, :country)
     end
 end
