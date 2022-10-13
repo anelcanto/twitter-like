@@ -4,11 +4,14 @@
     <div class="card-body">
       <h5 class="card-title">Mood: <%=@post.mood%> | Country: <%=@post.country%></h5>
       <p class="card-text"><%=@post.content%></h5></p>
-      <%= link_to "Show", post_path(@post.id), class: "btn btn-primary"%>
+      <%= link_to "Edit", post_path(@post.id), class: "btn btn-primary"%>
+      <%= link_to "Delete", post_path(@post.id), class: "btn btn-danger"%>
     </div>
   </div>
   <br>
 
   
 </div>
-<%= link_to "New tweet", new_post_path, class: "btn btn-primary btn-lg", type:"button" %>
+<div class="d-grid gap-2 d-md-flex justify-content-md-end">
+  <%= link_to "New tweet", new_post_path, class: "btn btn-primary btn-lg", type:"button" %>
+</div>
