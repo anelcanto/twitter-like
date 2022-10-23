@@ -14,7 +14,7 @@ class PostsController < ApplicationController
     def create
         @post = Post.new post_params
         if @post.save
-            redirect_to posts_path, notice: "Task created."
+            redirect_to posts_path, notice: "Post created."
         else
             render :new, status: :unprocessable_entity
         end

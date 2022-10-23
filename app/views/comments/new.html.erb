@@ -1,8 +1,7 @@
 <% title "New Comment"  %>
-<%= bootstrap_form_with(model: [@post, @post.comments.create], local: true) do |f| %>
+<%= bootstrap_form_with(model: [@post, @comment], local: true) do |f| %>
     <%= f.text_area :content, hide_label: true, placeholder: "Type your tweet." %>
     <%= f.select :mood, ["Happy","Sad","Bored","Excited"], { label: "Choose your current mood:", wrapper: { class: 'has-warning', data: { foo: 'bar' } } }, { class: "selectpicker" } %>
-    <%= f.select :country, ["USA","Japan","UK","Germany"], { label: "Choose your country of origin", wrapper: { class: 'has-warning', data: { foo: 'bar' } } }, { class: "selectpicker" } %>
     </br>
     <%= f.submit "Submit", class: "btn btn-primary btn-lg" %>
-    <% end %>
+<% end %>

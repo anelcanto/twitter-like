@@ -1,17 +1,20 @@
 class CommentsController < ApplicationController
-   def new
-    @post = Post.find(params[:post_id])
-    @comment = @post.comments.new(post_id: params[:post_id])
+  before_action :load_post
+  before_action :load_comment
+  
+  def new
+    @comment = Comment.new
   end
 
-  # def create
-  #       @comment = @post.comments.new post_params
-  #       if @comment.save
-  #           redirect_to posts_path, notice: "Post created."
-  #       else
-  #           render :new, status: :unprocessable_entity
-  #       end
-  # end
+  def create
+    @comment = Comment.new comment_params
+    if @post.comments << @comment
+      redirect_to post_path(@post,@comment), notice: "Comment Created"
+    else
+      render :new, status: :unprocessable_entity
+    end
+       
+  end
 
   def update
   end
@@ -26,5 +29,17 @@ class CommentsController < ApplicationController
   end
 
   def show
+  end
+  
+  def load_comment
+    @comment = Comment.find params[:post_id]
+  end
+  
+  def load_post
+    @post = Post.find params[:post_id]
+  end
+  
+  def comment_params
+    params.require(:comment).permit(:content, :post_id, :mood)
   end
 end
