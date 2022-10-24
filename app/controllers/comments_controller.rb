@@ -1,6 +1,6 @@
 class CommentsController < ApplicationController
   before_action :load_post
-  before_action :load_comment
+  before_action :load_comment, except: [:new, :create]
   
   def new
     @comment = Comment.new
@@ -8,8 +8,10 @@ class CommentsController < ApplicationController
 
   def create
     @comment = Comment.new comment_params
-    if @post.comments << @comment
-      redirect_to post_path(@post,@comment), notice: "Comment Created"
+    @comment.post = @post
+    if @comment.save 
+      # redirect_to post_path(@post,@comment), notice: "Comment Created"
+      redirect_to post_path(@post), notice: "Comment Created."
     else
       render :new, status: :unprocessable_entity
     end
@@ -32,7 +34,7 @@ class CommentsController < ApplicationController
   end
   
   def load_comment
-    @comment = Comment.find params[:post_id]
+    @comment = Comment.find params[:comment]
   end
   
   def load_post

@@ -1,0 +1,21 @@
+<div class="card p-3 mt-2">
+    <div class="d-flex justify-content-between align-items-end">
+        <div class="user d-flex flex-row align-items-center">
+            <img src="https://i.imgur.com/0LKZQYM.jpg" width="30" class="user-img rounded-circle mr-2">
+            <small class="font-weight-bold text-primary ms-1"> user_next_assignment</small>  
+        </div>
+        <small class="font-weight-bold text-secondary">Mood: <%= comment.mood %></small>
+    </div>
+    <div class="action d-flex justify-content-between mt-2 align-items-center">
+
+        <div class="reply px-4">
+            <%= comment.content %>
+        </div>
+
+        <div class="icons align-items-center">
+            <i class="fa fa-user-plus text-muted"></i>
+            <i class="fa fa-check-circle-o check-icon text-primary"> <%= link_to "Edit", post_comment_path(@post), class:"text-decoration-none" %></i>
+            <i class="fa fa-star-o text-danger">Destroy</i>
+        </div>
+    </div>
+</div>
