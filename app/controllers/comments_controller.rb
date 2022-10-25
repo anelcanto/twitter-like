@@ -30,8 +30,8 @@ class CommentsController < ApplicationController
 
  
   def destroy
-    @comment.destroy
-    redirect_to posts_path(@post), alert: "Comment deleted"
+    @comment.delete
+    redirect_to @post, alert: "Comment  deleted"
   end
 
   def index
