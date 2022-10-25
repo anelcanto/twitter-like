@@ -1,6 +1,6 @@
 class CommentsController < ApplicationController
   before_action :load_post
-  before_action :load_comment, except: [:new, :create]
+  before_action :load_comment, except: [:index, :new, :create]
   
   def new
     @comment = Comment.new
@@ -34,7 +34,7 @@ class CommentsController < ApplicationController
   end
   
   def load_comment
-    @comment = Comment.find params[:comment]
+    @comment = Comment.find params[:id]
   end
   
   def load_post
