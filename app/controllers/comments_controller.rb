@@ -19,6 +19,11 @@ class CommentsController < ApplicationController
   end
 
   def update
+    if @comment.update comment_params
+      redirect_to post_path(@post), notice: "Comment updated"
+    else
+      render :edit, status: :unprocessable_entity
+    end
   end
 
   def edit

@@ -14,7 +14,7 @@
 
         <div class="icons align-items-center">
             <i class="fa fa-check-circle-o check-icon text-primary"> <%= link_to "Show", post_comment_path(@post, comment), class:"text-decoration-none" %></i>
-            <i class="fa fa-check-circle-o check-icon text-primary"> <%= link_to "Edit", post_comment_path(@post, comment), class:"text-decoration-none" %></i>
+            <i class="fa fa-check-circle-o check-icon text-primary"> <%= link_to "Edit", edit_post_comment_path(@post, comment), class:"text-decoration-none" %></i>
             <i class="fa fa-star-o text-danger">Destroy</i>
         </div>
     </div>
