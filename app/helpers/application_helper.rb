@@ -14,5 +14,4 @@ module ApplicationHelper
             when "alert" then "alert alert-info"
         end
     end
-    
 end

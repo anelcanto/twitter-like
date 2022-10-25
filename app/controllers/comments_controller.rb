@@ -15,7 +15,6 @@ class CommentsController < ApplicationController
     else
       render :new, status: :unprocessable_entity
     end
-       
   end
 
   def update
@@ -29,7 +28,10 @@ class CommentsController < ApplicationController
   def edit
   end
 
+ 
   def destroy
+    @comment.destroy
+    redirect_to posts_path(@post), alert: "Comment deleted"
   end
 
   def index
