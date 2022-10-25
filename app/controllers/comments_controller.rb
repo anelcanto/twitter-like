@@ -34,7 +34,7 @@ class CommentsController < ApplicationController
   end
   
   def load_comment
-    @comment = Comment.find params[:id]
+    @comment = @post.comments.find params[:id]
   end
   
   def load_post
