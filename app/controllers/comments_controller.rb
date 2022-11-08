@@ -2,7 +2,7 @@ class CommentsController < ApplicationController
   before_action :load_post
   before_action :load_comment, except: [:index, :new, :create]
   before_action :authenticate, except: [:index, :show]
-  before_action :verify_ownership, except: [:index, :show]
+  before_action :verify_ownership, except: [:index, :show,  :new, :create]
   
   def new
     @comment = Comment.new
