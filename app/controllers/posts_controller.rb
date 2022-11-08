@@ -1,5 +1,9 @@
 class PostsController < ApplicationController
-    before_action :authenticate, except: [:index, :show]
+    before_action :load_post, except: [:index, :new, :create]
+    before_action :authenticate, except: [:index, :show, :create, :new]
+    before_action :verify_ownership, except: [:index, :show, :create, :new]
+
+
     
     # GET   /posts         
     def index
@@ -24,17 +28,14 @@ class PostsController < ApplicationController
     
     # GET   /posts/:id
     def show
-        @post = Post.find params[:id]
     end
     
     # GET   /posts/:id/edit
     def edit
-        @post = Post.find params[:id]
     end
     
     #  PATCH (or PUT)  /posts/:id
     def update
-        @post = Post.find params[:id]
         if @post.update post_params
             redirect_to @post, notice: "Post was updated."
         else
@@ -44,12 +45,21 @@ class PostsController < ApplicationController
     
     #  DELETE /posts/:id
     def destroy
-        @post = Post.find params[:id]
         @post.destroy
         redirect_to posts_path, alert: "Post  deleted"
     end
     
     def post_params
-        params.require(:post).permit(:content, :parent_id, :mood, :country)
+        params.require(:post).permit(:content, :mood, :country)
+    end
+    
+    def verify_ownership
+        unless current_user == @post.user
+             redirect_to root_path, notice: "Not authorized"
+        end
+    end
+    
+    def load_post
+        @post = Post.find params[:id]
     end
 end

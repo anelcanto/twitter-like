@@ -43,6 +43,8 @@ class CommentsController < ApplicationController
   def show
   end
   
+  private
+  
   def load_comment
     @comment = @post.comments.find params[:id]
   end
@@ -53,5 +55,11 @@ class CommentsController < ApplicationController
   
   def comment_params
     params.require(:comment).permit(:content, :post_id, :mood)
+  end
+  
+  def verify_ownership
+    unless current_user == @comment.user
+         redirect_to root_path, notice: "Not authorized"
+    end
   end
 end

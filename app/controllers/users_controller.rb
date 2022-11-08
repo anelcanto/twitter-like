@@ -1,5 +1,7 @@
 class UsersController < ApplicationController
+  
   before_action :authenticate, :load_user, except: [:new, :create]
+  before_action :verify_ownership, only: [:update, :show]
   
   def new
     @user = User.new
@@ -37,6 +39,13 @@ class UsersController < ApplicationController
   def user_params
     params.require(:user).permit(:name, :email, :password, :password_confirmation, :username)
   end
+  
+  def verify_ownership
+        unless @user == current_user
+             redirect_to root_path, notice: "Not authorized"
+        end
+    end
+  
   
   
 end
