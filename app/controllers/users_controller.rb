@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+  before_action :load_user, except: [:new, :create]
+  
   def new
     @user = User.new
   end
@@ -16,7 +18,21 @@ class UsersController < ApplicationController
   def show
   end
   
+  def update
+    if @user.update user_params
+      redirect_to users_path(@user), notice: "Profile information updated"
+    else
+      render :show, status: :unprocessable_entity
+    end
+  end
+  
+  
+  
   private
+  
+  def load_user
+    @user = User.find params[:id]
+  end
   
   def user_params
     params.require(:user).permit(:name, :email, :password, :password_confirmation)
