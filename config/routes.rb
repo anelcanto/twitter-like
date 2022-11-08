@@ -2,8 +2,9 @@ Rails.application.routes.draw do
   get "signup" => "users#new"
   # get "profile" => "users#show"\
   get "login" => "sessions#new"
+  get "logout" => "sessions#destroy"
   
-  resources :sessions, except: [:index, :new, :edit, :update, :show]
+  resources :sessions, except: [:index, :new, :edit, :update, :show, :destroy]
   resources :users, except: [:index] 
   resources :posts do 
     resources :comments
