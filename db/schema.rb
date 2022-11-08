@@ -10,25 +10,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_11_05_053435) do
+ActiveRecord::Schema[7.0].define(version: 2022_11_08_070709) do
   create_table "comments", force: :cascade do |t|
     t.string "tittle"
     t.text "content"
     t.string "mood"
-    t.string "string"
     t.integer "post_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "user_id"
   end
 
   create_table "posts", force: :cascade do |t|
     t.text "content"
-    t.integer "parent_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "mood"
     t.string "country"
-    t.index ["parent_id"], name: "index_posts_on_parent_id"
+    t.integer "user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -37,7 +36,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_05_053435) do
     t.string "password_digest"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "username"
   end
 
-  add_foreign_key "posts", "posts", column: "parent_id"
 end

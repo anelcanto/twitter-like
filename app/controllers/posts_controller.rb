@@ -1,4 +1,5 @@
 class PostsController < ApplicationController
+    before_action :authenticate, except: [:index, :show]
     
     # GET   /posts         
     def index
@@ -13,6 +14,7 @@ class PostsController < ApplicationController
     # POST  /posts
     def create
         @post = Post.new post_params
+        @post.user = current_user
         if @post.save
             redirect_to post_path(@post), notice: "Post created"
         else

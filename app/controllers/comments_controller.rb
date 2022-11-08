@@ -1,6 +1,7 @@
 class CommentsController < ApplicationController
   before_action :load_post
   before_action :load_comment, except: [:index, :new, :create]
+  before_action :authenticate, except: [:index, :show]
   
   def new
     @comment = Comment.new
@@ -8,7 +9,9 @@ class CommentsController < ApplicationController
 
   def create
     @comment = Comment.new comment_params
+    @comment.user = current_user
     @comment.post = @post
+    
     if @comment.save 
       # redirect_to post_path(@post,@comment), notice: "Comment Created"
       redirect_to post_path(@post), notice: "Comment Created."

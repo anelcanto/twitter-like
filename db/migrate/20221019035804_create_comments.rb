@@ -4,10 +4,7 @@ class CreateComments < ActiveRecord::Migration[7.0]
       t.string :tittle
       t.text :content
       t.string :mood
-      t.string :string
-      t.integer :
-      t.references :parent, foreign_key: { to_table: :posts }
-
+      t.integer :post_id
       t.timestamps
     end
   end
