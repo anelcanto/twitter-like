@@ -30,15 +30,26 @@ class UsersController < ApplicationController
   end
 
   def show
-    
   end
   
   def update
+    if @user.has_password?
+      if @user.authenticate(params[:user][:current_password])
+        if @user.update user_params
+          redirect_to users_path(@user), notice: "Profile information updated"
+        else
+          render :show, status: :unprocessable_entity
+        end
+      else
+        redirect_to users_path(@user), alert: "Your current password could not be verified"
+      end
+    else
       if @user.update user_params
         redirect_to users_path(@user), notice: "Profile information updated"
       else
-        render :show, status: :unprocessable_entity, alert: "PCannot be updated"
+        render :show, status: :unprocessable_entity
       end
+    end
   end
 
   def destroy
@@ -56,9 +67,6 @@ class UsersController < ApplicationController
     @user = User.find params[:id]
   end
 
-  def update_user_params
-    params.require(:user).permit(:current_password, :password, :password_confirmation, :unconfirmed_email, :username)
-  end
   
   def user_params
     params.require(:user).permit(:name, :email, :password, :password_confirmation, :username)

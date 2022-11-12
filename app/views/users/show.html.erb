@@ -15,10 +15,11 @@
         <div class="col-md-5 border-right">
             <%= bootstrap_form_with(model: current_user) do |f| %>
                 <%= f.alert_message "Please fix the errors below.", error_summary: false %>
-                <%= f.text_field :name%>
+                <%= f.text_field :name %>
                 <%= f.text_field :username %>
                 <%= f.email_field :email %>
                 <% if current_user.has_password? %>
+                        <%= f.password_field :current_password, label: "Current Password" %>
                         <%= f.password_field :password, label: "New Password" %>
                         <%= f.password_field :password_confirmation, label: "Confirm Password" %>
                 <% end %>
