@@ -1,9 +1,21 @@
 class User < ApplicationRecord
     has_secure_password
+    has_many :posts
+    has_many :comments
+
     validates :name, presence: :true
     validates :email, format: {with: /@/, message: "must have an @" }, presence: :true, uniqueness: true
     validates :username, presence: :true, uniqueness: true
     
-    has_many :posts
-    has_many :comments
+    def self.new_from_hash(user_hash)
+        user = User.new user_hash
+        user.password_digest = 0
+        user.username = "user_name"
+        user
+    end
+    
+    def has_password?
+        self.password_digest.nil? || self.password_digest != '0'
+    end
+
 end

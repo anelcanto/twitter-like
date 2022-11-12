@@ -5,4 +5,5 @@
     <%= f.password_field :password %>
     <%= f.primary 'Login' %>
 <% end %>
-
+</br>
+<%= button_to "Login with Github", "/auth/github", class: "btn btn-primary", data: { turbo: false } %>
