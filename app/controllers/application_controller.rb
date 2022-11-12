@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
     
     def authenticate
         unless current_user
-            redirect_to root_path, alert: "Invalid request"
+            redirect_to login_path, alert: "Please login"
         end
     end
     
