@@ -7,6 +7,7 @@ class PostsController < ApplicationController
     
     # GET   /posts         
     def index
+        # logout
         @posts = Post.all
     end
     

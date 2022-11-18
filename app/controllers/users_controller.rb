@@ -59,8 +59,6 @@ class UsersController < ApplicationController
     end
   end
   
-  
-  
   private
   
   def load_user
@@ -69,7 +67,7 @@ class UsersController < ApplicationController
 
   
   def user_params
-    params.require(:user).permit(:name, :email, :password, :password_confirmation, :username)
+    params.require(:user).permit(:name, :email, :password, :password_confirmation, :username, :avatar)
   end
   
   def verify_ownership
